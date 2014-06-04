@@ -1,4 +1,4 @@
-function [ analysis1, analysis2, ratings1_fullConc, ratings2_fullConc ] = statisticAnalysis(fileName)
+function [ analysis1, analysis2 ] = statisticAnalysis(fileName)
 % (Rhythm) data analysis script.
 %
 % N.B.: FIRST AND LAST COLUMNS OF ALL MATRICES AND VECTORS CONTAIN DATA
@@ -7,7 +7,7 @@ function [ analysis1, analysis2, ratings1_fullConc, ratings2_fullConc ] = statis
 %
 % Output consists of:
 %   cleaned data: [ ratingsX ]
-%   descriptives: [ muOutX, sigmaOutX, sigmaTotX ]
+%   descriptives: [ muOutX, sigmaOutX, sigmaTotX, nOutX, zAvgOutX ]
 %   concordance stats: [ alphaX ]
 %
 %
@@ -238,4 +238,13 @@ analysis2(1:5, 1:sizeMat) = ratings2_noCheck_final;
 analysis2(7:11, 1:sizeMat) = ratings2_fullConc_final;
 analysis2(13:17, 1:sizeMat) = ratings2_dsConc_final;
 analysis2(19:23, 1:sizeMat) = ratings2_adjConc_final;
+
+
+
+
+
+
+
+
+
 end
