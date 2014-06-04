@@ -39,13 +39,13 @@ end
 
 % Run concordance checks cf. discription above.
 if concLevel == 1
-    [ row, ~ ] = find(matrix(:,1) ~= matrix(:,1));
+    [ row, ~ ] = find(matrix(:,1) ~= matrix(:, end));
     matrix(row, :) = [];
     
 elseif concLevel == 2
     matrix(matrix == 2) = 1;
     matrix(matrix == 3) = 4;
-    [ row, ~ ] = find(matrix(:,1) ~= matrix(:,1));
+    [ row, ~ ] = find(matrix(:,1) ~= matrix(:, end));
     matrix(row, :) = [];
     
 elseif concLevel == 3
@@ -61,6 +61,13 @@ elseif concLevel == 3
         end
     end
 end
+
+
+% Remove safety pairs from output.
+matrix(:, 1) = [];
+matrix(:, end) = [];
+
+
 
 output = matrix;
 

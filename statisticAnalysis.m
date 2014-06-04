@@ -1,4 +1,4 @@
-function [ analysis1, analysis2 ] = statisticAnalysis(fileName)
+function [ analysis1, analysis2, ratings1_fullConc, ratings2_fullConc ] = statisticAnalysis(fileName)
 % (Rhythm) data analysis script.
 %
 % N.B.: FIRST AND LAST COLUMNS OF ALL MATRICES AND VECTORS CONTAIN DATA
@@ -55,6 +55,12 @@ ratings2_dsConc = safetyCheck(ratings2_noCheck, 2, 1);
 ratings1_adjConc = safetyCheck(ratings1_noCheck, 3, 1);
 ratings2_adjConc = safetyCheck(ratings2_noCheck, 3, 1);
 
+% Remove safety pairs from ratingsN_noCheck.
+ratings1_noCheck(:, 1) = [];
+ratings2_noCheck(:, 1) = [];
+ratings1_noCheck(:, end) = [];
+ratings2_noCheck(:, end) = [];
+
 
 % Get descriptives.
 [ mu1, sigma1 ] = descriptives(ratings1_noCheck);
@@ -64,7 +70,6 @@ muOut1(1, :) = mu1(1, :);
 muOut2(1, :) = mu2(1, :);
 sigmaOut1(1, :) = sigma1(1, :);
 sigmaOut2(1, :) = sigma2(1, :);
-
 
 [ mu1, sigma1 ] = descriptives(ratings1_fullConc);
 [ mu2, sigma2 ] = descriptives(ratings2_fullConc);
