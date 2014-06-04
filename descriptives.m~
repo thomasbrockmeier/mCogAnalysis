@@ -24,7 +24,7 @@ end
 
 
 
-
+disp(zAvg)
 
 
 end

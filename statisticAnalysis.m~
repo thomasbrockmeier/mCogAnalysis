@@ -114,12 +114,9 @@ zAvgOut2(4, :) = zAvg2(1, :);
 
 % Get the standard deviations of the set of standard deviations per group
 % of rating(n)_X.
-sigmaTot1 = zeros(1, 4);
-sigmaTot2 = zeros(1, 4);
-
 for i = 1:4
-    sigmaTot1(i) = std(sigmaOut1(i, 1:size(sigmaOut1)));
-    sigmaTot2(i) = std(sigmaOut2(i, 1:size(sigmaOut2)));
+    sigmaTot1(i) = std(sigmaOut1(i, 2:size(sigmaOut1 - 1)));
+    sigmaTot2(i) = std(sigmaOut2(i, 2:size(sigmaOut2 - 1)));
 end
 
 % Calculate Krippendorff's alpha.
