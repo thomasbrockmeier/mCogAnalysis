@@ -1,4 +1,4 @@
-function [ ratings2_fullConc, zRemoval ] = statisticAnalysis_zLoop(fileName)
+function [ dataMatrix ] = statisticAnalysis_ptcptRemoval(fileName)
 % (Rhythm) data analysis script.
 %
 %
@@ -23,13 +23,13 @@ function [ ratings2_fullConc, zRemoval ] = statisticAnalysis_zLoop(fileName)
 %
 % CURRENT VERSIONS:
 % Rhythm:
-% [ ratings2_fullConc, zRemoval ] = statisticAnalysis_zLoop('rhythmmerged20140522.xlsx');
+% [ ratings2_fullConc ] = statisticAnalysis_ptcptRemoval('rhythmmerged20140522.xlsx');
 %
 % Timbre:
-% [ ratings2_fullConc, zRemoval ] = statisticAnalysis_zLoop('timbremerged20140522.xlsx');
+% [ ratings2_fullConc ] = statisticAnalysis_ptcptRemoval('timbremerged20140522.xlsx');
 %
 % General:
-% [ ratings2_fullConc, zRemoval ] = statisticAnalysis_zLoop('general20140522.xlsx');
+% [ ratings2_fullConc ] = statisticAnalysis_ptcptRemoval('general20140522.xlsx');
 
 
 % Supply target alpha:
@@ -42,46 +42,37 @@ importText = import.textdata;
 
 % Truncate input to only contain ratings.
 % N.B.: ratings2 contains no judgements with confidence value '1'.
-[ ~, ratings2_noCheck ] = reformat(importData);
+[ ~, dataMatrix ] = reformat(importData);
 
 % Check for discrepancies in the ratings of the safety pairs.
-ratings2_fullConc = safetyCheck(ratings2_noCheck, 1, 0);
-
-% Get absolute average Z-scores:
-[ ~, ~, ~, zAvg ] = descriptives(ratings2_fullConc);
-zAvg = abs(zAvg);
-
-% Add pair numbers.
-zAvg(2, :) = zAvg(1, :);
-zAvg(1, :) = 1:190;
-
-% Get highest Z-score and pair number.
-[ zMaxVal, zMaxCoo ] = max(zAvg(2, :));
-zRemoval(1, 1) = zAvg(1, zMaxCoo);
-zRemoval(1, 2) = zMaxVal;
+dataMatrix = safetyCheck(dataMatrix, 1, 0);
 
 % Calculate Krippendorff's alpha.
 dataType = 'interval';
-currentAlpha = kriAlpha(ratings2_fullConc, dataType);
+currentAlpha = kriAlpha(dataMatrix, dataType);
 
 counter = 0;
 while currentAlpha < targetAlpha
     counter = counter + 1;
     
-    % Get highest Z-score and pair number.
-    [ zMaxVal, zMaxCoo ] = max(zAvg(2, :));
-    zRemoval(counter, 1) = zAvg(1, zMaxCoo);
-    zRemoval(counter, 2) = zMaxVal;
-
-    % Remove highest Z-score pair from pool and Z-score vector.
-    ratings2_fullConc(:, zMaxCoo) = [];
-    zAvg(2, zMaxCoo) = -1;
+    % Test for effect of removing participants on alpha.
+    for i = 1:size(dataMatrix, 1)
+        % Duplicate matrix.
+        dataMatrixTemp = dataMatrix;
+        
+        % Remove participant i.
+        dataMatrixTemp(i, :) = [];
+        currentAlphaTemp(i) = kriAlpha(dataMatrixTemp, dataType);
+    end
     
-    % Recalculate Krippendorff's alpha.
-    currentAlpha = kriAlpha(ratings2_fullConc, dataType);
+    % Get participant ID with most detrimental effect on alpha and remove.
+    [ ~, currentAlphaIndex ] = min(currentAlphaTemp);
+    dataMatrix(currentAlphaIndex, :) = [];
     
+    currentAlpha = kriAlpha(dataMatrix, dataType);
+    disp(currentAlpha)
 end
 
-fprintf('%2.0f pairs removed to achieve alpha = %1.4f.\n', counter, currentAlpha)
+fprintf('%2.0f participants removed to achieve alpha = %1.4f.\n', counter, currentAlpha)
 
 end

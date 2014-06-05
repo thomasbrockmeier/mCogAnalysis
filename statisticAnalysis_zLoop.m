@@ -53,7 +53,7 @@ zAvg = abs(zAvg);
 
 % Add pair numbers.
 zAvg(2, :) = zAvg(1, :);
-zAvg(1, :) = 1:190;
+zAvg(1, :) = 1:size(zAvg, 2);
 
 % Get highest Z-score and pair number.
 [ zMaxVal, zMaxCoo ] = max(zAvg(2, :));
