@@ -26,6 +26,7 @@ for i = 1:nIterations
 end
 
 kappaOut = mean(kappaCollect(:, 1));
+pOut = mean(kappaCollect(:, 2));
 
 
 

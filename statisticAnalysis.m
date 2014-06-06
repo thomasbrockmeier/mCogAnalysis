@@ -147,17 +147,17 @@ alpha2(4) = kriAlpha(ratings2_adjConc, dataType);
 %       N < 10.
 nIter = 1000;
 
-kappa1(1) = waterDeity(ratings1_noCheck, nIter);
-kappa2(1) = waterDeity(ratings2_noCheck, nIter);
+[ kappa1(1), p1(1) ] = waterDeity(ratings1_noCheck, nIter);
+[ kappa2(1), p2(1) ] = waterDeity(ratings2_noCheck, nIter);
 
-kappa1(2) = waterDeity(ratings1_fullConc, nIter);
-kappa2(2) = waterDeity(ratings2_fullConc, nIter);
+[ kappa1(2), p1(2) ] = waterDeity(ratings1_fullConc, nIter);
+[ kappa2(2), p2(2) ] = waterDeity(ratings2_fullConc, nIter);
 
-kappa1(3) = waterDeity(ratings1_dsConc, nIter);
-kappa2(3) = waterDeity(ratings2_dsConc, nIter);
+[ kappa1(3), p1(3) ] = waterDeity(ratings1_dsConc, nIter);
+[ kappa2(3), p2(3) ] = waterDeity(ratings2_dsConc, nIter);
 
-kappa1(4) = waterDeity(ratings1_adjConc, nIter);
-kappa2(4) = waterDeity(ratings2_adjConc, nIter);
+[ kappa1(4), p1(4) ] = waterDeity(ratings1_adjConc, nIter);
+[ kappa2(4), p2(4) ] = waterDeity(ratings2_adjConc, nIter);
 
 % Reformat data:
 % Row 1 contains mean rating.
@@ -173,8 +173,9 @@ ratings1_noCheck_final(4, :) = zAvgOut1(1, 1:sizeMat);
 ratings1_noCheck_final(5, 1) = sigmaTot1(1);
 ratings1_noCheck_final(5, 2) = alpha1(1);
 ratings1_noCheck_final(5, 3) = kappa1(1);
-ratings1_noCheck_final(5, 5) = min(nOut1(1, :));
-ratings1_noCheck_final(5, 6) = max(nOut1(1, :));
+ratings1_noCheck_final(5, 4) = p1(1);
+ratings1_noCheck_final(5, 7) = min(nOut1(1, :));
+ratings1_noCheck_final(5, 8) = max(nOut1(1, :));
 
 ratings1_fullConc_final = nan(5, sizeMat);
 ratings1_fullConc_final(1, :) = nOut1(2, 1:sizeMat);
@@ -184,8 +185,9 @@ ratings1_fullConc_final(4, :) = zAvgOut1(2, 1:sizeMat);
 ratings1_fullConc_final(5, 1) = sigmaTot1(2);
 ratings1_fullConc_final(5, 2) = alpha1(2);
 ratings1_fullConc_final(5, 3) = kappa1(2);
-ratings1_fullConc_final(5, 5) = min(nOut1(2, :));
-ratings1_fullConc_final(5, 6) = max(nOut1(2, :));
+ratings1_fullConc_final(5, 4) = p1(2);
+ratings1_fullConc_final(5, 6) = min(nOut1(2, :));
+ratings1_fullConc_final(5, 7) = max(nOut1(2, :));
 
 ratings1_dsConc_final = nan(5, sizeMat);
 ratings1_dsConc_final(1, :) = nOut1(3, 1:sizeMat);
@@ -195,8 +197,9 @@ ratings1_dsConc_final(4, :) = zAvgOut1(3, 1:sizeMat);
 ratings1_dsConc_final(5, 1) = sigmaTot1(3);
 ratings1_dsConc_final(5, 2) = alpha1(3);
 ratings1_dsConc_final(5, 3) = kappa1(3);
-ratings1_dsConc_final(5, 5) = min(nOut1(3, :));
-ratings1_dsConc_final(5, 6) = max(nOut1(3, :));
+ratings1_dsConc_final(5, 4) = p1(3);
+ratings1_dsConc_final(5, 6) = min(nOut1(3, :));
+ratings1_dsConc_final(5, 7) = max(nOut1(3, :));
 
 ratings1_adjConc_final = nan(5, sizeMat);
 ratings1_adjConc_final(1, :) = nOut1(4, 1:sizeMat);
@@ -206,8 +209,9 @@ ratings1_adjConc_final(4, :) = zAvgOut1(4, 1:sizeMat);
 ratings1_adjConc_final(5, 1) = sigmaTot1(4);
 ratings1_adjConc_final(5, 2) = alpha1(4);
 ratings1_adjConc_final(5, 3) = kappa1(4);
-ratings1_adjConc_final(5, 5) = min(nOut1(4, :));
-ratings1_adjConc_final(5, 6) = max(nOut1(4, :));
+ratings1_adjConc_final(5, 4) = p1(4);
+ratings1_adjConc_final(5, 6) = min(nOut1(4, :));
+ratings1_adjConc_final(5, 7) = max(nOut1(4, :));
 
 ratings2_noCheck_final = nan(5, sizeMat);
 ratings2_noCheck_final(1, :) = nOut2(1, 1:sizeMat);
@@ -217,8 +221,9 @@ ratings2_noCheck_final(4, :) = zAvgOut2(1, 1:sizeMat);
 ratings2_noCheck_final(5, 1) = sigmaTot2(1);
 ratings2_noCheck_final(5, 2) = alpha2(1);
 ratings2_noCheck_final(5, 3) = kappa2(1);
-ratings2_noCheck_final(5, 5) = min(nOut2(1, :));
-ratings2_noCheck_final(5, 6) = max(nOut2(1, :));
+ratings2_noCheck_final(5, 4) = p2(1);
+ratings2_noCheck_final(5, 6) = min(nOut2(1, :));
+ratings2_noCheck_final(5, 7) = max(nOut2(1, :));
 
 ratings2_fullConc_final = nan(5, sizeMat);
 ratings2_fullConc_final(1, :) = nOut2(2, 1:sizeMat);
@@ -228,8 +233,9 @@ ratings2_fullConc_final(4, :) = zAvgOut2(2, 1:sizeMat);
 ratings2_fullConc_final(5, 1) = sigmaTot2(2);
 ratings2_fullConc_final(5, 2) = alpha2(2);
 ratings2_fullConc_final(5, 3) = kappa2(2);
+ratings2_fullConc_final(5, 4) = p2(2);
 ratings2_fullConc_final(5, 6) = min(nOut2(2, :));
-ratings2_fullConc_final(5, 6) = max(nOut2(2, :));
+ratings2_fullConc_final(5, 7) = max(nOut2(2, :));
 
 ratings2_dsConc_final = nan(5, sizeMat);
 ratings2_dsConc_final(1, :) = nOut2(3, 1:sizeMat);
@@ -239,8 +245,9 @@ ratings2_dsConc_final(4, :) = zAvgOut2(3, 1:sizeMat);
 ratings2_dsConc_final(5, 1) = sigmaTot2(3);
 ratings2_dsConc_final(5, 2) = alpha2(3);
 ratings2_dsConc_final(5, 3) = kappa2(3);
-ratings2_dsConc_final(5, 5) = min(nOut2(3, :));
-ratings2_dsConc_final(5, 6) = max(nOut2(3, :));
+ratings2_dsConc_final(5, 4) = p2(3);
+ratings2_dsConc_final(5, 6) = min(nOut2(3, :));
+ratings2_dsConc_final(5, 7) = max(nOut2(3, :));
 
 ratings2_adjConc_final = nan(5, sizeMat);
 ratings2_adjConc_final(1, :) = nOut2(4, 1:sizeMat);
@@ -250,8 +257,9 @@ ratings2_adjConc_final(4, :) = zAvgOut2(4, 1:sizeMat);
 ratings2_adjConc_final(5, 1) = sigmaTot2(4);
 ratings2_adjConc_final(5, 2) = alpha2(4);
 ratings2_adjConc_final(5, 3) = kappa2(4);
-ratings2_adjConc_final(5, 5) = min(nOut2(4, :));
-ratings2_adjConc_final(5, 6) = max(nOut2(4, :));
+ratings2_adjConc_final(5, 4) = p2(4);
+ratings2_adjConc_final(5, 6) = min(nOut2(4, :));
+ratings2_adjConc_final(5, 7) = max(nOut2(4, :));
 
 % Create large output matrices.
 analysis1 = nan(23, sizeMat);
