@@ -1,4 +1,4 @@
-function [ analysis1, analysis2 ] = statisticAnalysis(fileName)
+function [ analysis1, analysis2, ratings1_noCheck, nOut1 ] = statisticAnalysis(fileName)
 % (Rhythm) data analysis script.
 %
 % N.B.: FIRST AND LAST COLUMNS OF ALL MATRICES AND VECTORS CONTAIN DATA

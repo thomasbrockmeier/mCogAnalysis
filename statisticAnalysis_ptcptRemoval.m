@@ -2,8 +2,8 @@ function [ dataMatrix ] = statisticAnalysis_ptcptRemoval(fileName)
 % (Rhythm) data analysis script.
 %
 %
-% ADJUSTED VERSION: REACHES TARGET ALPHA VALUE BY REMOVING HIGHEST AVERAGE
-%                   ABSOLUTE Z-SCORE FROM DATA POOL THROUGH WHILE-LOOP.
+% ADJUSTED VERSION: REACHES TARGET ALPHA VALUE BY REMOVING PARTICIPANTS
+%                   DETRIMENTAL TO ALPHA FROM POOL THROUGH WHILE-LOOP.
 %
 %
 %
@@ -13,7 +13,6 @@ function [ dataMatrix ] = statisticAnalysis_ptcptRemoval(fileName)
 %
 % Output consists of:
 %                   - New data matrix with bad (high Z) pairs removed.
-%                   - List of removed pairs with their Z-scores.
 %
 % N.B.              - Responses with confidence level 1 are not being
 %                     taken into account.

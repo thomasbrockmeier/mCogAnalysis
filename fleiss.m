@@ -1,4 +1,4 @@
-function fleiss(varargin)
+function [ k, p ] = fleiss(varargin)
 % FLEISS: compute the Fleiss'es kappa
 % Fleiss'es kappa is a generalisation of Scott's pi statistic, a
 % statistical measure of inter-rater reliability. It is also related to
