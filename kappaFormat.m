@@ -38,7 +38,7 @@ for i = 1:nPairs
     end
 end
 
-Calculate kappa statistic.
-[k, p ] = fleiss(kappaMatrix)
+% Calculate kappa statistic.
+[ ~, k, p ] = evalc('fleiss(kappaMatrix);');
 
 end
