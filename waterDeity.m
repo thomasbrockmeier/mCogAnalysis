@@ -1,4 +1,4 @@
-function [ kappaOut, kappaCollect ] = waterDeity( dataMatrix, nIterations )
+function [ kappaOut, pOut, kappaCollect ] = waterDeity( dataMatrix, nIterations )
 % Reiterates a custom variant of Fleiss' kappa that has been designed to
 % work with incomplete data. The variant uses random removal of data points
 % to allow correct reformatting of the input data to achieve compatibility
