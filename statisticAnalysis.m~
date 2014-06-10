@@ -145,7 +145,7 @@ alpha2(4) = kriAlpha(ratings2_adjConc, dataType);
 % N.B., Caution should be taken when interpreting the kappa rating of
 %       datasets wherein the pair with the lowest amount of judges has 
 %       N < 10.
-nIter = 1000;
+nIter = 1;
 
 [ kappa1(1), p1(1) ] = waterDeity(ratings1_noCheck, nIter);
 [ kappa2(1), p2(1) ] = waterDeity(ratings2_noCheck, nIter);
@@ -184,8 +184,8 @@ ratings1_fullConc_final(3, :) = sigmaOut1(2, 1:sizeMat);
 ratings1_fullConc_final(4, :) = zAvgOut1(2, 1:sizeMat);
 ratings1_fullConc_final(5, 1) = sigmaTot1(2);
 ratings1_fullConc_final(5, 2) = alpha1(2);
-% ratings1_fullConc_final(5, 3) = kappa1(2);
-% ratings1_fullConc_final(5, 4) = p1(2);
+ratings1_fullConc_final(5, 3) = kappa1(2);
+ratings1_fullConc_final(5, 4) = p1(2);
 ratings1_fullConc_final(5, 6) = min(nOut1(2, :));
 ratings1_fullConc_final(5, 7) = max(nOut1(2, :));
 
@@ -232,8 +232,8 @@ ratings2_fullConc_final(3, :) = sigmaOut2(2, 1:sizeMat);
 ratings2_fullConc_final(4, :) = zAvgOut2(2, 1:sizeMat);
 ratings2_fullConc_final(5, 1) = sigmaTot2(2);
 ratings2_fullConc_final(5, 2) = alpha2(2);
-% ratings2_fullConc_final(5, 3) = kappa2(2);
-% ratings2_fullConc_final(5, 4) = p2(2);
+ratings2_fullConc_final(5, 3) = kappa2(2);
+ratings2_fullConc_final(5, 4) = p2(2);
 ratings2_fullConc_final(5, 6) = min(nOut2(2, :));
 ratings2_fullConc_final(5, 7) = max(nOut2(2, :));
 
