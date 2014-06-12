@@ -1,5 +1,9 @@
 function output = generalCompRT( general, rhythm, timbre )
 % Compare general to R&T data.
+% Output contains pair number, p-value general vs. rhythm, p-value general 
+% vs. timbre and the 'winner' (lower p-value -> this dimension is 
+% considered more concordant with general sim.), from rows one to four 
+% respectively.
 %
 % Console input:
 % output = generalCompRT( 'general20140522.xlsx', 'rhythmmerged20140522.xlsx', 'timbremerged20140522.xlsx' );
@@ -45,26 +49,35 @@ for i = 1:size(rhythmMat, 2)
     end
 end
 
-output = cell(2, size(rhythmMat, 2));
-
-size(generalMat)
-size(rhythmMat)
+output = cell(4, size(rhythmMat, 2));
 
 for j = 1:size(rhythmMat, 2)
+    % Pair number.
+    output{1, j} = genPairID(j);
     % Wilcoxon general vs. rhythm.
-    [ pGR, ~, ~ ] = ranksum(generalMat(:, j), rhythmMat(:, j));
+    [ pGR, hGR, ~ ] = ranksum(generalMat(:, j), rhythmMat(:, j));
+    output{2, j} = pGR;
     
     % Wilcoxon general vs. timbre.
-    [ pGT, ~, ~ ] = ranksum(generalMat(:, j), timbreMat(:, j));
-    
+    [ pGT, hGT, ~ ] = ranksum(generalMat(:, j), timbreMat(:, j));
+    output{3, j} = pGT;
+    disp(hGR);disp(
     % Assign higher similarity of rhythm or timbre data to general
-    % experiment to the lower p-value.
-    if pGR < pGT
-        output{1, j} = 'RHYTHM';
-    elseif pGT < pGR
-        output{1, j} = 'TIMBRE';
+    % experiment to the lower p-value. Also check for significance.
+    if hGR == 1 && hGT == 0 && pGR <= 0.05
+        output{4, j} = 'RHYTHM';
+    elseif hGT == 1 && hGR == 0 && pGT <= 0.05
+        output{4, j} = 'TIMBRE';
+    elseif hGT == 1 && hGR == 1 && pGR <= 0.05 && pGT <= 0.05
+        if pGR < pGT
+            output{4, j} = 'RHYTHM';
+        elseif pGT < pGR
+            output{4, j} = 'TIMBRE';
+        else
+            output{4, j} = 'TIE';
+        end
     else
-        output{1, j} = 'TIE';
+        output{4, j} = 'TIE';
     end
 end
 end

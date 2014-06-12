@@ -55,19 +55,27 @@ for j = 1:size(rhythmMat, 2)
     % Pair number.
     output{1, j} = genPairID(j);
     % Wilcoxon general vs. rhythm.
-    [ pGR, ~, ~ ] = ranksum(generalMat(:, j), rhythmMat(:, j));
+    [ pGR, hGR, ~ ] = ranksum(generalMat(:, j), rhythmMat(:, j));
     output{2, j} = pGR;
     
     % Wilcoxon general vs. timbre.
-    [ pGT, ~, ~ ] = ranksum(generalMat(:, j), timbreMat(:, j));
+    [ pGT, hGT, ~ ] = ranksum(generalMat(:, j), timbreMat(:, j));
     output{3, j} = pGT;
     
     % Assign higher similarity of rhythm or timbre data to general
     % experiment to the lower p-value. Also check for significance.
-    if pGR < pGT && pGR <= 0.05
+    if hGR == 1 && hGT == 0 && pGR <= 0.05
         output{4, j} = 'RHYTHM';
-    elseif pGT < pGR && pGT <= 0.05
+    elseif hGT == 1 && hGR == 0 && pGT <= 0.05
         output{4, j} = 'TIMBRE';
+    elseif hGT == 1 && hGR == 1 && pGR <= 0.05 && pGT <= 0.05
+        if pGR < pGT
+            output{4, j} = 'RHYTHM';
+        elseif pGT < pGR
+            output{4, j} = 'TIMBRE';
+        else
+            output{4, j} = 'TIE';
+        end
     else
         output{4, j} = 'TIE';
     end
