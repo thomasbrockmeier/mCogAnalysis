@@ -32,6 +32,9 @@ function [ analysis1, analysis2 ] = statisticAnalysis(fileName)
 %
 % General:
 % [ analysis1, analysis2 ] = statisticAnalysis('general20140522.xlsx');
+%
+% Rhythm WPC:
+% [ analysis1, analysis2 ] = statisticAnalysis('rhythmWPC.xlsx');
 
 
 % Import raw data from Survey Gizmo output.
@@ -145,7 +148,7 @@ alpha2(4) = kriAlpha(ratings2_adjConc, dataType);
 % N.B., Caution should be taken when interpreting the kappa rating of
 %       datasets wherein the pair with the lowest amount of judges has 
 %       N < 10.
-nIter = 1;
+nIter = 1000;
 
 [ kappa1(1), p1(1) ] = waterDeity(ratings1_noCheck, nIter);
 [ kappa2(1), p2(1) ] = waterDeity(ratings2_noCheck, nIter);
