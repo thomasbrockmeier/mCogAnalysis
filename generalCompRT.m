@@ -1,9 +1,8 @@
-function output = generalCompRT( general, rhythm, timbre )
+function [ output, rhythmMat ] = generalCompRT( general, rhythm, timbre )
 % Compare general to R&T data.
 % Output contains pair number, p-value general vs. rhythm, p-value general 
-% vs. timbre and the 'winner' (lower p-value -> this dimension is 
-% considered more concordant with general sim.), from rows one to four 
-% respectively.
+% vs. timbre, the 'winner' and U and p-values for general vs. rhythm and
+% general vs. timbre.
 %
 % Console input:
 % output = generalCompRT( 'general20140522.xlsx', 'rhythmmerged20140522.xlsx', 'timbremerged20140522.xlsx' );
@@ -49,29 +48,33 @@ for i = 1:size(rhythmMat, 2)
     end
 end
 
-output = cell(4, size(rhythmMat, 2));
+output = cell(9, size(rhythmMat, 2));
 
 for j = 1:size(rhythmMat, 2)
     % Pair number.
     output{1, j} = genPairID(j);
     % Wilcoxon general vs. rhythm.
-    [ pGR, hGR, ~ ] = ranksum(generalMat(:, j), rhythmMat(:, j));
+    [ pGR, hGR, uGR ] = ranksum(generalMat(:, j), rhythmMat(:, j));
     output{2, j} = pGR;
     
+    nR = sum(~isnan(rhythmMat(:, j)));
+    
     % Wilcoxon general vs. timbre.
-    [ pGT, hGT, ~ ] = ranksum(generalMat(:, j), timbreMat(:, j));
+    [ pGT, hGT, uGT ] = ranksum(generalMat(:, j), timbreMat(:, j));
     output{3, j} = pGT;
+    
+    nT = sum(~isnan(timbreMat(:, j)));
     
     % Assign higher similarity of rhythm or timbre data to general
     % experiment to the lower p-value. Also check for significance.
-    if hGR == 1 && hGT == 0 && pGR <= 0.05
+    if hGR == 1 && hGT == 0
         output{4, j} = 'RHYTHM';
-    elseif hGT == 1 && hGR == 0 && pGT <= 0.05
+    elseif hGT == 1 && hGR == 0
         output{4, j} = 'TIMBRE';
-    elseif hGT == 1 && hGR == 1 && pGR <= 0.05 && pGT <= 0.05
-        if pGR < pGT
+    elseif hGT == 1 && hGR == 1
+        if uGR.ranksum / nR > uGT.ranksum / nT
             output{4, j} = 'RHYTHM';
-        elseif pGT < pGR
+        elseif uGT.ranksum / nT > uGR.ranksum / nR
             output{4, j} = 'TIMBRE';
         else
             output{4, j} = 'TIE';
@@ -79,5 +82,11 @@ for j = 1:size(rhythmMat, 2)
     else
         output{4, j} = 'TIE';
     end
+    
+    % Tack on U statistic and N raters.
+    output{6, j} = uGR.ranksum / nR;
+    output{7, j} = nR;
+    output{8, j} = uGT.ranksum / nT;
+    output{9, j} = nT;
 end
 end
