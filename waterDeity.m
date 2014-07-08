@@ -16,18 +16,24 @@ function [ kappaOut, pOut, kappaCollect ] = waterDeity( dataMatrix, nIterations 
 %   corresponding p values (column 2).
 
 
-kappaCollect = zeros(nIterations, 2);
+if size(dataMatrix, 1) == 1 || size(dataMatrix, 2) == 1
+    disp('Invalid input, waterDiety() aborted!')
+    kappaOut = 0;
+    pOut = 0;
+    kappaCollect = 0;
+else
+    kappaCollect = zeros(nIterations, 2);
 
-for i = 1:nIterations
-    [ k, p ] = kappaFormat(dataMatrix);
-    
-    kappaCollect(i, 1) = k;
-    kappaCollect(i, 2) = p;
+    for i = 1:nIterations
+        [ k, p ] = kappaFormat(dataMatrix);
+
+        kappaCollect(i, 1) = k;
+        kappaCollect(i, 2) = p;
+    end
+
+    kappaOut = mean(kappaCollect(:, 1));
+    pOut = mean(kappaCollect(:, 2));
 end
-
-kappaOut = mean(kappaCollect(:, 1));
-pOut = mean(kappaCollect(:, 2));
-
 
 
 end
