@@ -37,7 +37,7 @@ end
 % % end
 
 
-% Run concordance checks cf. discription above.
+% Run concordance checks cf. description above.
 if concLevel == 1
     [ row, ~ ] = find(matrix(:,1) ~= matrix(:, end));
     matrix(row, :) = [];
@@ -63,12 +63,15 @@ elseif concLevel == 3
 end
 
 
-
-
-
 output = matrix;
 
 
+for y = size(output, 2):-1:1
+    if sum(~isnan(output(:, y))) == 0
+        output(:, y) = output(:, y + 1);
+        output(:, y + 1) = [];
+    end
+end
 
 
 

@@ -50,6 +50,8 @@ end
 
 output = cell(9, size(rhythmMat, 2));
 
+[k p ] =waterDeity(safetyCheck(rhythmMat, 1, 1), 1000)
+
 for j = 1:size(rhythmMat, 2)
     % Pair number.
     output{1, j} = genPairID(j);
