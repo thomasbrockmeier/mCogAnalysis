@@ -57,65 +57,65 @@ ratings2_dsConc = safetyCheck18pairs(ratings2_noCheck, 2, 1);
 ratings1_adjConc = safetyCheck18pairs(ratings1_noCheck, 3, 1);
 ratings2_adjConc = safetyCheck18pairs(ratings2_noCheck, 3, 1);
 
-% Get descriptives.
-[ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_noCheck);
-[ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_noCheck);
-
-muOut1(1, :) = mu1(1, :);
-muOut2(1, :) = mu2(1, :);
-sigmaOut1(1, :) = sigma1(1, :);
-sigmaOut2(1, :) = sigma2(1, :);
-nOut1(1, :) = n1(1, :);
-nOut2(1, :) = n2(1, :);
-zAvgOut1(1, :) = zAvg1(1, :);
-zAvgOut2(1, :) = zAvg2(1, :);
-
-[ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_fullConc);
-[ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_fullConc);
-
-muOut1(2, :) = mu1(1, :);
-muOut2(2, :) = mu2(1, :);
-sigmaOut1(2, :) = sigma1(1, :);
-sigmaOut2(2, :) = sigma2(1, :);
-nOut1(2, :) = n1(1, :);
-nOut2(2, :) = n2(1, :);
-zAvgOut1(2, :) = zAvg1(1, :);
-zAvgOut2(2, :) = zAvg2(1, :);
-
-[ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_dsConc);
-[ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_dsConc);
-
-muOut1(3, :) = mu1(1, :);
-muOut2(3, :) = mu2(1, :);
-sigmaOut1(3, :) = sigma1(1, :);
-sigmaOut2(3, :) = sigma2(1, :);
-nOut1(3, :) = n1(1, :);
-nOut2(3, :) = n2(1, :);
-zAvgOut1(3, :) = zAvg1(1, :);
-zAvgOut2(3, :) = zAvg2(1, :);
-
-[ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_adjConc);
-[ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_adjConc);
-
-muOut1(4, :) = mu1(1, :);
-muOut2(4, :) = mu2(1, :);
-sigmaOut1(4, :) = sigma1(1, :);
-sigmaOut2(4, :) = sigma2(1, :);
-nOut1(4, :) = n1(1, :);
-nOut2(4, :) = n2(1, :);
-zAvgOut1(4, :) = zAvg1(1, :);
-zAvgOut2(4, :) = zAvg2(1, :);
-
-
-% Get the standard deviations of the set of standard deviations per group
-% of rating(n)_X.
-sigmaTot1 = zeros(1, 4);
-sigmaTot2 = zeros(1, 4);
-
-for i = 1:4
-    sigmaTot1(i) = std(sigmaOut1(i, 1:size(sigmaOut1)));
-    sigmaTot2(i) = std(sigmaOut2(i, 1:size(sigmaOut2)));
-end
+% % % Get descriptives.
+% % [ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_noCheck);
+% % [ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_noCheck);
+% % 
+% % muOut1(1, :) = mu1(1, :);
+% % muOut2(1, :) = mu2(1, :);
+% % sigmaOut1(1, :) = sigma1(1, :);
+% % sigmaOut2(1, :) = sigma2(1, :);
+% % nOut1(1, :) = n1(1, :);
+% % nOut2(1, :) = n2(1, :);
+% % zAvgOut1(1, :) = zAvg1(1, :);
+% % zAvgOut2(1, :) = zAvg2(1, :);
+% % 
+% % [ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_fullConc);
+% % [ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_fullConc);
+% % 
+% % muOut1(2, :) = mu1(1, :);
+% % muOut2(2, :) = mu2(1, :);
+% % sigmaOut1(2, :) = sigma1(1, :);
+% % sigmaOut2(2, :) = sigma2(1, :);
+% % nOut1(2, :) = n1(1, :);
+% % nOut2(2, :) = n2(1, :);
+% % zAvgOut1(2, :) = zAvg1(1, :);
+% % zAvgOut2(2, :) = zAvg2(1, :);
+% % 
+% % [ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_dsConc);
+% % [ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_dsConc);
+% % 
+% % muOut1(3, :) = mu1(1, :);
+% % muOut2(3, :) = mu2(1, :);
+% % sigmaOut1(3, :) = sigma1(1, :);
+% % sigmaOut2(3, :) = sigma2(1, :);
+% % nOut1(3, :) = n1(1, :);
+% % nOut2(3, :) = n2(1, :);
+% % zAvgOut1(3, :) = zAvg1(1, :);
+% % zAvgOut2(3, :) = zAvg2(1, :);
+% % 
+% % [ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_adjConc);
+% % [ mu2, sigma2, n2, zAvg2 ] = descriptives(ratings2_adjConc);
+% % 
+% % muOut1(4, :) = mu1(1, :);
+% % muOut2(4, :) = mu2(1, :);
+% % sigmaOut1(4, :) = sigma1(1, :);
+% % sigmaOut2(4, :) = sigma2(1, :);
+% % nOut1(4, :) = n1(1, :);
+% % nOut2(4, :) = n2(1, :);
+% % zAvgOut1(4, :) = zAvg1(1, :);
+% % zAvgOut2(4, :) = zAvg2(1, :);
+% % 
+% % 
+% % % Get the standard deviations of the set of standard deviations per group
+% % % of rating(n)_X.
+% % sigmaTot1 = zeros(1, 4);
+% % sigmaTot2 = zeros(1, 4);
+% % 
+% % for i = 1:4
+% %     sigmaTot1(i) = std(sigmaOut1(i, 1:size(sigmaOut1)));
+% %     sigmaTot2(i) = std(sigmaOut2(i, 1:size(sigmaOut2)));
+% % end
 
 % Calculate Krippendorff's alpha.
 % Missing values have to be coded as NaN or inf.
@@ -154,107 +154,107 @@ nIter = 1000;
 [ kappa1(4), p1(4) ] = waterDeity(ratings1_adjConc, nIter);
 [ kappa2(4), p2(4) ] = waterDeity(ratings2_adjConc, nIter);
 
-% Reformat data:
-% Row 1 contains mean rating.
-% Row 2 contains pair sDev.
-% Row 3 contains total sDev and alpha statistic, respectively.
+% % Reformat data:
+% % Row 1 contains mean rating.
+% % Row 2 contains pair sDev.
+% % Row 3 contains total sDev and alpha statistic, respectively.
 sizeMat = size(ratings1_noCheck, 2);
-
+% 
 ratings1_noCheck_final = nan(5, sizeMat);
-ratings1_noCheck_final(1, :) = nOut1(1, 1:sizeMat);
-ratings1_noCheck_final(2, :) = muOut1(1, 1:sizeMat);
-ratings1_noCheck_final(3, :) = sigmaOut1(1, 1:sizeMat);
-ratings1_noCheck_final(4, :) = zAvgOut1(1, 1:sizeMat);
-ratings1_noCheck_final(5, 1) = sigmaTot1(1);
+% ratings1_noCheck_final(1, :) = nOut1(1, 1:sizeMat);
+% ratings1_noCheck_final(2, :) = muOut1(1, 1:sizeMat);
+% ratings1_noCheck_final(3, :) = sigmaOut1(1, 1:sizeMat);
+% ratings1_noCheck_final(4, :) = zAvgOut1(1, 1:sizeMat);
+% ratings1_noCheck_final(5, 1) = sigmaTot1(1);
 ratings1_noCheck_final(5, 2) = alpha1(1);
 ratings1_noCheck_final(5, 3) = kappa1(1);
 ratings1_noCheck_final(5, 4) = p1(1);
-ratings1_noCheck_final(5, 6) = min(nOut1(1, :));
-ratings1_noCheck_final(5, 7) = max(nOut1(1, :));
-
+% ratings1_noCheck_final(5, 6) = min(nOut1(1, :));
+% ratings1_noCheck_final(5, 7) = max(nOut1(1, :));
+% 
 ratings1_fullConc_final = nan(5, sizeMat);
-ratings1_fullConc_final(1, :) = nOut1(2, 1:sizeMat);
-ratings1_fullConc_final(2, :) = muOut1(2, 1:sizeMat);
-ratings1_fullConc_final(3, :) = sigmaOut1(2, 1:sizeMat);
-ratings1_fullConc_final(4, :) = zAvgOut1(2, 1:sizeMat);
-ratings1_fullConc_final(5, 1) = sigmaTot1(2);
+% ratings1_fullConc_final(1, :) = nOut1(2, 1:sizeMat);
+% ratings1_fullConc_final(2, :) = muOut1(2, 1:sizeMat);
+% ratings1_fullConc_final(3, :) = sigmaOut1(2, 1:sizeMat);
+% ratings1_fullConc_final(4, :) = zAvgOut1(2, 1:sizeMat);
+% ratings1_fullConc_final(5, 1) = sigmaTot1(2);
 ratings1_fullConc_final(5, 2) = alpha1(2);
 ratings1_fullConc_final(5, 3) = kappa1(2);
 ratings1_fullConc_final(5, 4) = p1(2);
-ratings1_fullConc_final(5, 6) = min(nOut1(2, :));
-ratings1_fullConc_final(5, 7) = max(nOut1(2, :));
-
+% ratings1_fullConc_final(5, 6) = min(nOut1(2, :));
+% ratings1_fullConc_final(5, 7) = max(nOut1(2, :));
+% 
 ratings1_dsConc_final = nan(5, sizeMat);
-ratings1_dsConc_final(1, :) = nOut1(3, 1:sizeMat);
-ratings1_dsConc_final(2, :) = muOut1(3, 1:sizeMat);
-ratings1_dsConc_final(3, :) = sigmaOut1(3, 1:sizeMat);
-ratings1_dsConc_final(4, :) = zAvgOut1(3, 1:sizeMat);
-ratings1_dsConc_final(5, 1) = sigmaTot1(3);
+% ratings1_dsConc_final(1, :) = nOut1(3, 1:sizeMat);
+% ratings1_dsConc_final(2, :) = muOut1(3, 1:sizeMat);
+% ratings1_dsConc_final(3, :) = sigmaOut1(3, 1:sizeMat);
+% ratings1_dsConc_final(4, :) = zAvgOut1(3, 1:sizeMat);
+% ratings1_dsConc_final(5, 1) = sigmaTot1(3);
 ratings1_dsConc_final(5, 2) = alpha1(3);
 ratings1_dsConc_final(5, 3) = kappa1(3);
 ratings1_dsConc_final(5, 4) = p1(3);
-ratings1_dsConc_final(5, 6) = min(nOut1(3, :));
-ratings1_dsConc_final(5, 7) = max(nOut1(3, :));
-
+% ratings1_dsConc_final(5, 6) = min(nOut1(3, :));
+% ratings1_dsConc_final(5, 7) = max(nOut1(3, :));
+% 
 ratings1_adjConc_final = nan(5, sizeMat);
-ratings1_adjConc_final(1, :) = nOut1(4, 1:sizeMat);
-ratings1_adjConc_final(2, :) = muOut1(4, 1:sizeMat);
-ratings1_adjConc_final(3, :) = sigmaOut1(4, 1:sizeMat);
-ratings1_adjConc_final(4, :) = zAvgOut1(4, 1:sizeMat);
-ratings1_adjConc_final(5, 1) = sigmaTot1(4);
+% ratings1_adjConc_final(1, :) = nOut1(4, 1:sizeMat);
+% ratings1_adjConc_final(2, :) = muOut1(4, 1:sizeMat);
+% ratings1_adjConc_final(3, :) = sigmaOut1(4, 1:sizeMat);
+% ratings1_adjConc_final(4, :) = zAvgOut1(4, 1:sizeMat);
+% ratings1_adjConc_final(5, 1) = sigmaTot1(4);
 ratings1_adjConc_final(5, 2) = alpha1(4);
 ratings1_adjConc_final(5, 3) = kappa1(4);
 ratings1_adjConc_final(5, 4) = p1(4);
-ratings1_adjConc_final(5, 6) = min(nOut1(4, :));
-ratings1_adjConc_final(5, 7) = max(nOut1(4, :));
-
+% ratings1_adjConc_final(5, 6) = min(nOut1(4, :));
+% ratings1_adjConc_final(5, 7) = max(nOut1(4, :));
+% 
 ratings2_noCheck_final = nan(5, sizeMat);
-ratings2_noCheck_final(1, :) = nOut2(1, 1:sizeMat);
-ratings2_noCheck_final(2, :) = muOut2(1, 1:sizeMat);
-ratings2_noCheck_final(3, :) = sigmaOut2(1, 1:sizeMat);
-ratings2_noCheck_final(4, :) = zAvgOut2(1, 1:sizeMat);
-ratings2_noCheck_final(5, 1) = sigmaTot2(1);
+% ratings2_noCheck_final(1, :) = nOut2(1, 1:sizeMat);
+% ratings2_noCheck_final(2, :) = muOut2(1, 1:sizeMat);
+% ratings2_noCheck_final(3, :) = sigmaOut2(1, 1:sizeMat);
+% ratings2_noCheck_final(4, :) = zAvgOut2(1, 1:sizeMat);
+% ratings2_noCheck_final(5, 1) = sigmaTot2(1);
 ratings2_noCheck_final(5, 2) = alpha2(1);
 ratings2_noCheck_final(5, 3) = kappa2(1);
 ratings2_noCheck_final(5, 4) = p2(1);
-ratings2_noCheck_final(5, 6) = min(nOut2(1, :));
-ratings2_noCheck_final(5, 7) = max(nOut2(1, :));
-
+% ratings2_noCheck_final(5, 6) = min(nOut2(1, :));
+% ratings2_noCheck_final(5, 7) = max(nOut2(1, :));
+% 
 ratings2_fullConc_final = nan(5, sizeMat);
-ratings2_fullConc_final(1, :) = nOut2(2, 1:sizeMat);
-ratings2_fullConc_final(2, :) = muOut2(2, 1:sizeMat);
-ratings2_fullConc_final(3, :) = sigmaOut2(2, 1:sizeMat);
-ratings2_fullConc_final(4, :) = zAvgOut2(2, 1:sizeMat);
-ratings2_fullConc_final(5, 1) = sigmaTot2(2);
+% ratings2_fullConc_final(1, :) = nOut2(2, 1:sizeMat);
+% ratings2_fullConc_final(2, :) = muOut2(2, 1:sizeMat);
+% ratings2_fullConc_final(3, :) = sigmaOut2(2, 1:sizeMat);
+% ratings2_fullConc_final(4, :) = zAvgOut2(2, 1:sizeMat);
+% ratings2_fullConc_final(5, 1) = sigmaTot2(2);
 ratings2_fullConc_final(5, 2) = alpha2(2);
 ratings2_fullConc_final(5, 3) = kappa2(2);
 ratings2_fullConc_final(5, 4) = p2(2);
-ratings2_fullConc_final(5, 6) = min(nOut2(2, :));
-ratings2_fullConc_final(5, 7) = max(nOut2(2, :));
-
+% ratings2_fullConc_final(5, 6) = min(nOut2(2, :));
+% ratings2_fullConc_final(5, 7) = max(nOut2(2, :));
+% 
 ratings2_dsConc_final = nan(5, sizeMat);
-ratings2_dsConc_final(1, :) = nOut2(3, 1:sizeMat);
-ratings2_dsConc_final(2, :) = muOut2(3, 1:sizeMat);
-ratings2_dsConc_final(3, :) = sigmaOut2(3, 1:sizeMat);
-ratings2_dsConc_final(4, :) = zAvgOut2(3, 1:sizeMat);
-ratings2_dsConc_final(5, 1) = sigmaTot2(3);
+% ratings2_dsConc_final(1, :) = nOut2(3, 1:sizeMat);
+% ratings2_dsConc_final(2, :) = muOut2(3, 1:sizeMat);
+% ratings2_dsConc_final(3, :) = sigmaOut2(3, 1:sizeMat);
+% ratings2_dsConc_final(4, :) = zAvgOut2(3, 1:sizeMat);
+% ratings2_dsConc_final(5, 1) = sigmaTot2(3);
 ratings2_dsConc_final(5, 2) = alpha2(3);
 ratings2_dsConc_final(5, 3) = kappa2(3);
 ratings2_dsConc_final(5, 4) = p2(3);
-ratings2_dsConc_final(5, 6) = min(nOut2(3, :));
-ratings2_dsConc_final(5, 7) = max(nOut2(3, :));
-
+% ratings2_dsConc_final(5, 6) = min(nOut2(3, :));
+% ratings2_dsConc_final(5, 7) = max(nOut2(3, :));
+% 
 ratings2_adjConc_final = nan(5, sizeMat);
-ratings2_adjConc_final(1, :) = nOut2(4, 1:sizeMat);
-ratings2_adjConc_final(2, :) = muOut2(4, 1:sizeMat);
-ratings2_adjConc_final(3, :) = sigmaOut2(4, 1:sizeMat);
-ratings2_adjConc_final(4, :) = zAvgOut2(4, 1:sizeMat);
-ratings2_adjConc_final(5, 1) = sigmaTot2(4);
+% ratings2_adjConc_final(1, :) = nOut2(4, 1:sizeMat);
+% ratings2_adjConc_final(2, :) = muOut2(4, 1:sizeMat);
+% ratings2_adjConc_final(3, :) = sigmaOut2(4, 1:sizeMat);
+% ratings2_adjConc_final(4, :) = zAvgOut2(4, 1:sizeMat);
+% ratings2_adjConc_final(5, 1) = sigmaTot2(4);
 ratings2_adjConc_final(5, 2) = alpha2(4);
 ratings2_adjConc_final(5, 3) = kappa2(4);
 ratings2_adjConc_final(5, 4) = p2(4);
-ratings2_adjConc_final(5, 6) = min(nOut2(4, :));
-ratings2_adjConc_final(5, 7) = max(nOut2(4, :));
+% ratings2_adjConc_final(5, 6) = min(nOut2(4, :));
+% ratings2_adjConc_final(5, 7) = max(nOut2(4, :));
 
 % Create large output matrices.
 analysis1 = nan(23, sizeMat);

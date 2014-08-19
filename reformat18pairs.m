@@ -38,20 +38,19 @@ for i = size(outputAtemp, 2) - 1:-2:1
     
 end
 
-% % % Get only pairs that were used in general/WPC experiments.
-% % desiredPairs = [ 7 17 21 39 47 53 59 62 94 111 119 149 151 ...
-% %     176 178 184 188 190 ];
-% % 
-% % outputA = zeros(size(outputAtemp, 1), length(desiredPairs));
-% % outputB = zeros(size(outputBtemp, 1), length(desiredPairs));
-% % 
-% % for x = 1:length(desiredPairs)
-% %     outputA(:, x) = outputAtemp(:, desiredPairs(x) + 1);
-% %     outputB(:, x) = outputBtemp(:, desiredPairs(x) + 1);
-% % end
+% Get only pairs that were used in general/WPC experiments.
+desiredPairs = [ 1 7 17 21 39 47 53 59 62 94 111 119 149 151 ...
+    176 178 184 188 190 191 ];
 
-outputA = outputAtemp;
-outputB = outputBtemp;
+outputA = zeros(size(outputAtemp, 1), length(desiredPairs));
+outputB = zeros(size(outputBtemp, 1), length(desiredPairs));
+
+for x = 1:length(desiredPairs)
+    outputA(:, x) = outputAtemp(:, desiredPairs(x) + 1);
+    outputB(:, x) = outputBtemp(:, desiredPairs(x) + 1);
+end
+
+
 
 end
 

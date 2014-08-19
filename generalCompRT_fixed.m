@@ -1,11 +1,11 @@
-function [ output, rhythmMat ] = generalCompRT( general, rhythm, timbre )
+function [ output, rhythmMat ] = generalCompRT_fixed( general, rhythm, timbre )
 % Compare general to R&T data.
 % Output contains pair number, p-value general vs. rhythm, p-value general 
 % vs. timbre, the 'winner' and U and p-values for general vs. rhythm and
 % general vs. timbre.
 %
 % Console input:
-% output = generalCompRT( 'general20140522.xlsx', 'rhythmmerged20140522.xlsx', 'timbremerged20140522.xlsx' );
+% output = generalCompRT_fixed( 'general20140522.xlsx', 'rhythmmerged20140522.xlsx', 'timbremerged20140522.xlsx' );
 %
 %
 % To use this script to calculate kappa, add:
@@ -76,11 +76,13 @@ for j = 1:size(rhythmMat, 2)
         output{4, j} = 'TIMBRE';
     elseif hGT == 1 && hGR == 0
         output{4, j} = 'RHYTHM';
+    elseif hGT == 0 && hGR == 0
+        output{4, j} = 'TIE';
     elseif hGT == 1 && hGR == 1
-        if uGR.ranksum / nR > uGT.ranksum / nT
-            output{4, j} = 'TIMBRE';
-        elseif uGT.ranksum / nT > uGR.ranksum / nR
+        if uGR.ranksum > uGT.ranksum
             output{4, j} = 'RHYTHM';
+        elseif uGT.ranksum > uGR.ranksum
+            output{4, j} = 'TIMBRE';
         else
             output{4, j} = 'TIE';
         end
@@ -89,9 +91,9 @@ for j = 1:size(rhythmMat, 2)
     end
     
     % Tack on U statistic and N raters.
-    output{6, j} = uGR.ranksum / nR;
+    output{6, j} = uGR.ranksum;
     output{7, j} = nR;
-    output{8, j} = uGT.ranksum / nT;
+    output{8, j} = uGT.ranksum;
     output{9, j} = nT;
 end
 end

@@ -67,35 +67,42 @@ ratings1s2_noCheck(:, end) = [];
 % ratings1s2_noCheck = sample2;
 
 % Create output matrix.
-output = nan(18, size(ratings1s1_noCheck, 2));
-output(18, 1) = 0;
+output = nan(3, 1);
+% output(18, 1) = 0;
+
+counter = 0;
 
 % Check if pair 'i' was rated differently by the different groups.
 for i = 1:size(ratings1s1_noCheck, 2)
     % Wilcoxon Rank Sum Test.
-    [ p, h, stats ] = ranksum(ratings1s1_noCheck(:, i), ratings1s2_noCheck(:, i));
-    output(1, i) = p;
-    output(2, i) = h;
-    output(3, i) = stats.ranksum;
-    output(5, 1) = sum(output(2, :));
-    output(5, 2) = size(ratings1s1_noCheck, 2);
-    
-    % t-Test.
-    [ h, p, ci, stats ] = ttest2(ratings1s1_noCheck(:, i), ratings1s2_noCheck(:, i));
-    output(7, i) = p;
-    output(8, i) = h;
-    output(9, i) = ci(1);
-    output(10, i) = ci(2);
-    output(11, i) = stats.tstat;
-    output(12, i) = stats.df;
-    output(13, i) = stats.sd;
-    output(15, 1) = sum(output(8, :));
-    output(15, 2) = size(ratings1s1_noCheck, 2);
-    
-    % Check for differences between WRST and t-Test null-hypothesis
-    % rejection.
-    if output(2, i) ~= output(8, i)
-        output(17, i) = 12321;
-        output(18, 1) = output(18, 1) + 1;
+    try
+        [ p, h, stats ] = ranksum(ratings1s1_noCheck(:, i), ratings1s2_noCheck(:, i));
+    catch err
+        continue
     end
+    if h == 1
+            counter = counter + 1;
+            output(1, counter) = i;
+            output(2, counter) = stats.ranksum;
+            output(3, counter) = p;
+    end
+    
+%     % t-Test.
+%     [ h, p, ci, stats ] = ttest2(ratings1s1_noCheck(:, i), ratings1s2_noCheck(:, i));
+%     output(7, i) = p;
+%     output(8, i) = h;
+%     output(9, i) = ci(1);
+%     output(10, i) = ci(2);
+%     output(11, i) = stats.tstat;
+%     output(12, i) = stats.df;
+%     output(13, i) = stats.sd;
+%     output(15, 1) = sum(output(8, :));
+%     output(15, 2) = size(ratings1s1_noCheck, 2);
+%     
+%     % Check for differences between WRST and t-Test null-hypothesis
+%     % rejection.
+%     if output(2, i) ~= output(8, i)
+%         output(17, i) = 12321;
+%         output(18, 1) = output(18, 1) + 1;
+%     end
 end
