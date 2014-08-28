@@ -1,10 +1,10 @@
 function [ diffs ] = confidenceCompare()
 
 % Import raw data from Survey Gizmo output.
-import1 = importdata('rhythmmerged_YESTRAINING.xlsx');
+import1 = importdata('rhythmMergedMale.xlsx');
 importData1 = import1.data;
 
-import2 = importdata('rhythmmerged_NOTRAINING.xlsx');
+import2 = importdata('rhythmMergedFemale.xlsx');
 importData2 = import2.data;
 
 % Truncate input to only contain confidence values.
@@ -13,25 +13,14 @@ importData2 = import2.data;
 
 [ rhyN, ~ ] = reformatConfs(importData2);
 
-% Clear R and T matrices of all data, but the pairs that are available in
-% the G matrix as well.
-genPairID = [47 149 184 111 176 190 17 59 21 94 151 119 39 7 62 188 178 53];
-genPairID = sort(genPairID);
-rhythm18_Y = nan(1,18);
-rhythm18_N = nan(1,18);
+rhyY_vec = rhyY(:)';
+rhyN_vec = rhyN(:)';
+rhyY_vec(isnan(rhyY_vec)) = [];
+rhyN_vec(isnan(rhyN_vec)) = [];
 
-for i = 1:size(rhythm18_Y, 2)
-    for k = 1:length(genPairID)
-        rhythm18_Y(k, i) = rhyY(k, genPairID(i) + 1);
-        rhythm18_N(k, i) = rhyN(k, genPairID(i) + 1);
-    end
-end
-
-diffs = nan(3, size(rhyY));
-
-for j = 1:size(rhyY, 2)
-    [ p, h, u ] = ranksum(rhyY(:, j), rhyN(:, j));
-    diffs(1, j) = p;
-    diffs(2, j) = h;
-    diffs(3, j) = u.ranksum;
-end
+[ p, h, u ] = ranksum(rhyY_vec, rhyN_vec);
+diffs(1, 1) = sum(rhyY_vec) / length(rhyY_vec);
+diffs(2, 1) = sum(rhyN_vec) / length(rhyN_vec);
+diffs(3, 1) = p;
+diffs(4, 1) = h;
+diffs(5, 1) = u.ranksum;
