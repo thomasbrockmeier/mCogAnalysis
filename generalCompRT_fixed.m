@@ -1,7 +1,7 @@
 function [ output, rhythmMat ] = generalCompRT_fixed( general, rhythm, timbre )
 % Compare general to R&T data.
 % Output contains pair number, p-value general vs. rhythm, p-value general 
-% vs. timbre, the 'winner' and U and p-values for general vs. rhythm and
+% vs. timbre, the 'winner' and N and U values for general vs. rhythm and
 % general vs. timbre.
 %
 % Console input:

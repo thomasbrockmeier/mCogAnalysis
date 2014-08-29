@@ -1,4 +1,4 @@
-function [ analysis1, analysis2, ratings1_noCheck ] = statisticAnalysis18pairs(fileName)
+function [ analysis1, analysis2, ratings1_dsConc ] = statisticAnalysis18pairs(fileName)
 % (Rhythm) data analysis script.
 %
 % N.B.: FIRST AND LAST COLUMNS OF ALL MATRICES AND VECTORS CONTAIN DATA
@@ -48,14 +48,14 @@ importText = import.textdata;
 [ ratings1_noCheck, ratings2_noCheck ] = reformat18pairs(importData);
 
 % Check for discrepancies in the ratings of the safety pairs.
-ratings1_fullConc = safetyCheck18pairs(ratings1_noCheck, 1, 0);
-ratings2_fullConc = safetyCheck18pairs(ratings2_noCheck, 1, 0);
+ratings1_fullConc = ratings1_noCheck;
+ratings2_fullConc = ratings2_noCheck;
 
 ratings1_dsConc = safetyCheck18pairs(ratings1_noCheck, 2, 1);
 ratings2_dsConc = safetyCheck18pairs(ratings2_noCheck, 2, 1);
 
-ratings1_adjConc = safetyCheck18pairs(ratings1_noCheck, 3, 1);
-ratings2_adjConc = safetyCheck18pairs(ratings2_noCheck, 3, 1);
+ratings1_adjConc = ratings1_noCheck;
+ratings2_adjConc = ratings2_noCheck;
 
 % % % Get descriptives.
 % % [ mu1, sigma1, n1, zAvg1 ] = descriptives(ratings1_noCheck);

@@ -15,9 +15,7 @@ function [ diffs ] = confidenceCompare()
 %
 %
 % N.B.: When approaching zero, U occasionally loses its decimal point for 
-% an unknown reason. Since U becomes significant as it decreases (threshold
-% value depends on N), it can be assumed that it is in fact a low number
-% (and not in the hundreds of thousands or millions).
+% an unknown reason. Since U becomes significant as it decreases (thresholddepends on N),
 
 % Import raw data from Survey Gizmo output.
 import1 = importdata('rhythmMergedMale.xlsx');
@@ -43,3 +41,5 @@ diffs(2, 1) = sum(rhyN_vec) / length(rhyN_vec);
 diffs(3, 1) = p;
 diffs(4, 1) = h;
 diffs(5, 1) = u.ranksum;
+
+disp(u)

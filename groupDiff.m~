@@ -1,10 +1,11 @@
 function output = groupDiff( sample1, sample2 )
 % Computes Wilcoxon Rank Sum Test and two-sample t-Test, for all pairs.
 %
-% Every column represents one pair, the first three rows represent the pair
-% number, U statistic and p-value.
+% Every column represents one pair, the first three rows represent the WRST
+% (p-value, reject null-hypothesis, rank sum (U). Row five contains
+% the number of pairs for which the null-hypothesis may be rejected and the
+% total number of pairs.
 %
-% REMOVED; CODE STILL IN COMMENTS
 % The rows from seven onward represent the t-test(p-value, reject 
 % null-hypothesis, confidence intervals one and two, t-statistic,
 % degrees of freedom, standard deviation and the number of pairs for which 
@@ -13,7 +14,6 @@ function output = groupDiff( sample1, sample2 )
 % The second to last row contains a flag if null-hypothesis rejection is
 % different between WRST and t-Test, the last row contains the number of
 % times this occurred.
-% /REMOVED; CODE STILL IN COMMENTS
 %
 % Output format:
 %
