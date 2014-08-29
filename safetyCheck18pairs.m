@@ -1,4 +1,4 @@
-function output = safetyCheck18pairs(matrix, concLevel, inclNS)
+function [ output, nRemoved ] = safetyCheck18pairs(matrix, concLevel, inclNS)
 % This function checks for inconsitencies in the assessments of the safety
 % pairs (the first and last columns). concLevel must be either 1, 2, or 3
 % and inclNS must be 1 or 0 (see documentation below).
@@ -73,7 +73,7 @@ for y = size(output, 2):-1:1
     end
 end
 
-
+nRemoved = length(row)
 
 
 

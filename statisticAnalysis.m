@@ -1,4 +1,4 @@
-function [ analysis1, analysis2, ratings1_noCheck ] = statisticAnalysis(fileName)
+function [ analysis1, analysis2, ratings1_dsConc ] = statisticAnalysis(fileName)
 % (Rhythm) data analysis script.
 %
 % N.B.: FIRST AND LAST COLUMNS OF ALL MATRICES AND VECTORS CONTAIN DATA
@@ -40,7 +40,7 @@ function [ analysis1, analysis2, ratings1_noCheck ] = statisticAnalysis(fileName
 % Import raw data from Survey Gizmo output.
 import = importdata(fileName);
 importData = import.data;
-importText = import.textdata;
+%importText = import.textdata;
 
 
 % Truncate input to only contain ratings.
@@ -52,7 +52,7 @@ importText = import.textdata;
 ratings1_fullConc = safetyCheck(ratings1_noCheck, 1, 0);
 ratings2_fullConc = safetyCheck(ratings2_noCheck, 1, 0);
 
-ratings1_dsConc = safetyCheck(ratings1_noCheck, 2, 1);
+ratings1_dsConc = safetyCheck(ratings1_noCheck, 4, 1);
 ratings2_dsConc = safetyCheck(ratings2_noCheck, 2, 1);
 
 ratings1_adjConc = safetyCheck(ratings1_noCheck, 3, 1);

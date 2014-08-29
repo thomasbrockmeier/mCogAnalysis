@@ -22,7 +22,7 @@ function [ output, nRemoved ] = safetyCheck(matrix, concLevel, inclNS)
 
 
 % Check for proper formatting of input.
-while concLevel ~= 1 && concLevel ~= 2 && concLevel ~= 3 && concLevel ~= 4
+while concLevel ~= 1 && concLevel ~= 2 && concLevel ~= 3
     input('Error! Please enter a valid input for concLevel.');
 end
 
@@ -63,7 +63,7 @@ elseif concLevel == 3
             row(counter) = i;
         end
     end
-elseif concLevel == 4
+elseif concLevel == 3
     counter = 0;
     
     for i = 1:size(matrix, 1)
@@ -75,10 +75,7 @@ elseif concLevel == 4
             row(counter) = i;
         end
     end
-    matrix(matrix == 2) = 1;
-    matrix(matrix == 3) = 4;
-    row = 1:size(matrix, 1) - counter;
-    disp(row)
+    
 end
 
 
