@@ -68,24 +68,35 @@ elseif concLevel == 4
     
     for i = 1:size(matrix, 1)
         
-        if matrix(i, 1) == matrix(i, size(matrix, 2)) || ...
-                matrix(i, 1) == matrix(i, size(matrix, 2)) + 1 || ...
-                matrix(i, 1) == matrix(i, size(matrix, 2)) - 1
+%         if matrix(i, 1) == matrix(i, size(matrix, 2)) || ...
+%                 matrix(i, 1) == matrix(i, size(matrix, 2)) + 1 || ...
+%                 matrix(i, 1) == matrix(i, size(matrix, 2)) - 1
+
+        if (matrix(i, 1) == (matrix(i, size(matrix, 2)))) || ...
+                (matrix(i, 1) == 1 && matrix(i, size(matrix, 2)) == 2) || ...
+                (matrix(i, 1) == 2 && matrix(i, size(matrix, 2)) == 1) || ...
+                (matrix(i, 1) == 2 && matrix(i, size(matrix, 2)) == 3) || ...
+                (matrix(i, 1) == 3 && matrix(i, size(matrix, 2)) == 2) || ...
+                (matrix(i, 1) == 3 && matrix(i, size(matrix, 2)) == 4) || ...
+                (matrix(i, 1) == 4 && matrix(i, size(matrix, 2)) == 3)
             counter = counter + 1;
-            row(counter) = i;
+            keepRow(counter) = i;
         end
     end
+    
+    matrix = matrix(keepRow, :);
+    
     matrix(matrix == 2) = 1;
     matrix(matrix == 3) = 4;
-    row = 1:size(matrix, 1) - counter;
-    disp(row)
+%     row = 1:size(matrix, 1) - counter;
+%     disp(row)
 end
 
 
 % Remove safety pairs from output.
 matrix(:, 1) = [];
 matrix(:, end) = [];
-nRemoved = length(row);
+% nRemoved = length(row);
 
 
 output = matrix;
