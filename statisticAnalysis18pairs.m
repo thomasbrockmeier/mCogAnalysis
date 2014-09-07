@@ -31,7 +31,7 @@ function [ analysis1, analysis2, ratings1_dsConc ] = statisticAnalysis18pairs(fi
 % [ analysis1, analysis2 ] = statisticAnalysis18pairs('timbremerged20140522.xlsx');
 %
 % General:
-% [ analysis1, analysis2 ] = statisticAnalysis18pairs('general20140522.xlsx');
+% [ analysis1, analysis2 ] = statisticAnalysis18pairs('general20140714.xls');
 %
 % Rhythm WPC:
 % [ analysis1, analysis2 ] = statisticAnalysis18pairs('rhythmWPC.xlsx');

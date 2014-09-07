@@ -88,8 +88,8 @@ elseif concLevel == 4
     
     matrix(matrix == 2) = 1;
     matrix(matrix == 3) = 4;
-%     row = 1:size(matrix, 1) - counter;
-%     disp(row)
+    row = 1:size(matrix, 1) - counter;
+    disp(row)
 end
 
 

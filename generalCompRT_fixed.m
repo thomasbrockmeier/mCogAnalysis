@@ -5,7 +5,7 @@ function [ output, rhythmMat ] = generalCompRT_fixed( general, rhythm, timbre )
 % general vs. timbre.
 %
 % Console input:
-% output = generalCompRT_fixed( 'general20140522.xlsx', 'rhythmmerged20140522.xlsx', 'timbremerged20140522.xlsx' );
+% output = generalCompRT_fixed( 'general20140714.xls', 'rhythmmerged20140522.xlsx', 'timbre20140714.xlsx' );
 %
 %
 % To use this script to calculate kappa, add:
@@ -60,40 +60,69 @@ for j = 1:size(rhythmMat, 2)
     output{1, j} = genPairID(j);
     % Wilcoxon general vs. rhythm.
     [ pGR, hGR, uGR ] = ranksum(generalMat(:, j), rhythmMat(:, j));
-    output{2, j} = pGR;
     
     nR = sum(~isnan(rhythmMat(:, j)));
     
+    rRatings = rhythmMat(~isnan(rhythmMat(:, j)), j);
+    
+    output{2, j} = mean(generalMat(:, j));
+    
+    output{4, j} = nR;
+    output{5, j} = num2str(mean(rRatings),'%.4f');
+    output{6, j} = uGR.ranksum;
+    output{7, j} = num2str(mean(pGR),'%.4f');
+    
     % Wilcoxon general vs. timbre.
     [ pGT, hGT, uGT ] = ranksum(generalMat(:, j), timbreMat(:, j));
-    output{3, j} = pGT;
     
     nT = sum(~isnan(timbreMat(:, j)));
+    
+    tRatings = timbreMat(~isnan(timbreMat(:, j)), j);
+        
+    output{9, j} = nT;
+    output{10, j} = num2str(mean(tRatings),'%.4f');
+    output{11, j} = uGT.ranksum;
+    output{12, j} = num2str(mean(pGT),'%.4f');
     
     % Assign higher similarity of rhythm or timbre data to general
     % experiment to the lower p-value. Also check for significance.
     if hGR == 1 && hGT == 0
-        output{4, j} = 'TIMBRE';
+        output{14, j} = 'TIMBRE';
     elseif hGT == 1 && hGR == 0
-        output{4, j} = 'RHYTHM';
+        output{14, j} = 'RHYTHM';
     elseif hGT == 0 && hGR == 0
-        output{4, j} = 'TIE';
+        output{14, j} = 'TIE';
     elseif hGT == 1 && hGR == 1
         if uGR.ranksum > uGT.ranksum
-            output{4, j} = 'RHYTHM';
+            output{14, j} = 'RHYTHM';
         elseif uGT.ranksum > uGR.ranksum
-            output{4, j} = 'TIMBRE';
+            output{14, j} = 'TIMBRE';
         else
-            output{4, j} = 'TIE';
+            output{14, j} = 'TIE';
         end
     else
-        output{4, j} = 'TIE';
+        output{14, j} = 'TIE';
     end
-    
-    % Tack on U statistic and N raters.
-    output{6, j} = uGR.ranksum;
-    output{7, j} = nR;
-    output{8, j} = uGT.ranksum;
-    output{9, j} = nT;
 end
+
+% Predictions.
+output{15, 1}  = 'MRMT';
+output{15, 2}  = 'LRHT';
+output{15, 3}  = 'LRLT';
+output{15, 4}  = 'MRHT';
+output{15, 5}  = 'HRHT';
+output{15, 6}  = 'MRLT';
+output{15, 7}  = 'LRHT';
+output{15, 8}  = 'MRMT';
+output{15, 9}  = 'LRLT';
+output{15, 10} = 'HRLT';
+output{15, 11} = 'HRMT';
+output{15, 12} = 'HRHT';
+output{15, 13} = 'LRLT';
+output{15, 14} = 'HRLT';
+output{15, 15} = 'LRMT';
+output{15, 16} = 'HRHT';
+output{15, 17} = 'MRMT';
+output{15, 18} = 'HRLT';
+
 end

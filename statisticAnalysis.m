@@ -25,13 +25,13 @@ function [ analysis1, analysis2, ratings1_dsConc ] = statisticAnalysis(fileName)
 %
 % CURRENT VERSIONS:
 % Rhythm:
-% [ analysis1, analysis2 ] = statisticAnalysis('rhythmmerged20140522.xlsx');
+% [ analysis1, analysis2 ] = statisticAnalysis('rhythm20140522.xlsx');
 %
 % Timbre:
-% [ analysis1, analysis2 ] = statisticAnalysis('timbremerged20140522.xlsx');
+% [ analysis1, analysis2 ] = statisticAnalysis('timbre20140714.xlsx');
 %
 % General:
-% [ analysis1, analysis2 ] = statisticAnalysis('general20140522.xlsx');
+% [ analysis1, analysis2 ] = statisticAnalysis('general20140714.xlsx');
 %
 % Rhythm WPC:
 % [ analysis1, analysis2 ] = statisticAnalysis('rhythmWPC.xlsx');
@@ -128,7 +128,7 @@ end
 % Calculate Krippendorff's alpha.
 % Missing values have to be coded as NaN or inf.
 % Specify data type (supported are 'nominal', 'ordinal', 'interval').
-dataType = 'interval';
+dataType = 'ordinal';
 
 alpha1(1) = kriAlpha(ratings1_noCheck, dataType);
 alpha2(1) = kriAlpha(ratings2_noCheck, dataType);
